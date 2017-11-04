@@ -31,7 +31,12 @@ class ComplicatedServiceTypeMock: ComplicatedServiceType, Mock {
             
 
       var youCouldOnlyGetThis: String { 
-		get { return __youCouldOnlyGetThis }
+		get { 
+			guard let value = __youCouldOnlyGetThis else { 				print("[FATAL] ComplicatedServiceTypeMock - value for __youCouldOnlyGetThis is not set!")
+				fatalError("[FATAL] ComplicatedServiceTypeMock - value for __youCouldOnlyGetThis is not set!")
+			}
+			return value 
+		}
 		set { __youCouldOnlyGetThis = newValue }
 	}
 	private var __youCouldOnlyGetThis: String!                  
@@ -40,7 +45,11 @@ class ComplicatedServiceTypeMock: ComplicatedServiceType, Mock {
           addInvocation(.serviceName)
           	let perform = methodPerformValue(.serviceName) as? () -> Void
 			perform?()
-          return methodReturnValue(.serviceName) as! String 
+          guard let value = methodReturnValue(.serviceName) as? String else {
+			print("[FATAL] stub return value not specified for serviceName(). Use given.")
+			fatalError("[FATAL] stub return value not specified for serviceName(). Use given.")
+		}
+		return value
       }
       
       func aNewWayToSayHooray() {
@@ -54,28 +63,44 @@ class ComplicatedServiceTypeMock: ComplicatedServiceType, Mock {
           addInvocation(.getPoint__from_point(.value(point)))
           	let perform = methodPerformValue(.getPoint__from_point(.value(point))) as? (Point) -> Void
 			perform?(point)
-          return methodReturnValue(.getPoint__from_point(.value(point))) as! Point 
+          guard let value = methodReturnValue(.getPoint__from_point(.value(point))) as? Point else {
+			print("[FATAL] stub return value not specified for getPoint(from point: Point). Use given.")
+			fatalError("[FATAL] stub return value not specified for getPoint(from point: Point). Use given.")
+		}
+		return value
       }
       
       func getPoint(from tuple: (Float,Float)) -> Point {
           addInvocation(.getPoint__from_tuple(.value(tuple)))
           	let perform = methodPerformValue(.getPoint__from_tuple(.value(tuple))) as? ((Float,Float)) -> Void
 			perform?(tuple)
-          return methodReturnValue(.getPoint__from_tuple(.value(tuple))) as! Point 
+          guard let value = methodReturnValue(.getPoint__from_tuple(.value(tuple))) as? Point else {
+			print("[FATAL] stub return value not specified for getPoint(from tuple: (Float,Float)). Use given.")
+			fatalError("[FATAL] stub return value not specified for getPoint(from tuple: (Float,Float)). Use given.")
+		}
+		return value
       }
       
       func similarMethodThatDiffersOnType(_ value: Float) -> Bool {
           addInvocation(.similarMethodThatDiffersOnType__value_1(.value(value)))
           	let perform = methodPerformValue(.similarMethodThatDiffersOnType__value_1(.value(value))) as? (Float) -> Void
 			perform?(value)
-          return methodReturnValue(.similarMethodThatDiffersOnType__value_1(.value(value))) as! Bool 
+          guard let value = methodReturnValue(.similarMethodThatDiffersOnType__value_1(.value(value))) as? Bool else {
+			print("[FATAL] stub return value not specified for similarMethodThatDiffersOnType(_ value: Float). Use given.")
+			fatalError("[FATAL] stub return value not specified for similarMethodThatDiffersOnType(_ value: Float). Use given.")
+		}
+		return value
       }
       
       func similarMethodThatDiffersOnType(_ value: Point) -> Bool {
           addInvocation(.similarMethodThatDiffersOnType__value_2(.value(value)))
           	let perform = methodPerformValue(.similarMethodThatDiffersOnType__value_2(.value(value))) as? (Point) -> Void
 			perform?(value)
-          return methodReturnValue(.similarMethodThatDiffersOnType__value_2(.value(value))) as! Bool 
+          guard let value = methodReturnValue(.similarMethodThatDiffersOnType__value_2(.value(value))) as? Bool else {
+			print("[FATAL] stub return value not specified for similarMethodThatDiffersOnType(_ value: Point). Use given.")
+			fatalError("[FATAL] stub return value not specified for similarMethodThatDiffersOnType(_ value: Point). Use given.")
+		}
+		return value
       }
       
       func methodWithTypedef(_ scalar: Scalar) {
@@ -86,17 +111,25 @@ class ComplicatedServiceTypeMock: ComplicatedServiceType, Mock {
       }
       
       func methodWithClosures(success function: LinearFunction) -> ClosureFabric {
-          addInvocation(.methodWithClosures__success_function_1(.value(function)))
-          	let perform = methodPerformValue(.methodWithClosures__success_function_1(.value(function))) as? (LinearFunction) -> Void
+          addInvocation(.methodWithClosures__success_function_1(Parameter<LinearFunction>.any))
+          	let perform = methodPerformValue(.methodWithClosures__success_function_1(Parameter<LinearFunction>.any)) as? (LinearFunction) -> Void
 			perform?(function)
-          return methodReturnValue(.methodWithClosures__success_function_1(.value(function))) as! ClosureFabric 
+          guard let value = methodReturnValue(.methodWithClosures__success_function_1(.value(function))) as? ClosureFabric else {
+			print("[FATAL] stub return value not specified for methodWithClosures(success function: LinearFunction). Use given.")
+			fatalError("[FATAL] stub return value not specified for methodWithClosures(success function: LinearFunction). Use given.")
+		}
+		return value
       }
       
       func methodWithClosures(success function: ((Scalar,Scalar) -> Scalar)?) -> ((Int) -> Void) {
           addInvocation(.methodWithClosures__success_function_2(.value(function)))
           	let perform = methodPerformValue(.methodWithClosures__success_function_2(.value(function))) as? (((Scalar,Scalar) -> Scalar)?) -> Void
 			perform?(function)
-          return methodReturnValue(.methodWithClosures__success_function_2(.value(function))) as! ((Int) -> Void) 
+          guard let value = methodReturnValue(.methodWithClosures__success_function_2(.value(function))) as? ((Int) -> Void) else {
+			print("[FATAL] stub return value not specified for methodWithClosures(success function: ((Scalar,Scalar) -> Scalar)?). Use given.")
+			fatalError("[FATAL] stub return value not specified for methodWithClosures(success function: ((Scalar,Scalar) -> Scalar)?). Use given.")
+		}
+		return value
       }
       
       fileprivate enum MethodType {
@@ -335,21 +368,33 @@ class ItemsClientMock: ItemsClient, Mock {
           addInvocation(.getExampleItems)
           	let perform = methodPerformValue(.getExampleItems) as? () -> Void
 			perform?()
-          return methodReturnValue(.getExampleItems) as! Observable<[Item]> 
+          guard let value = methodReturnValue(.getExampleItems) as? Observable<[Item]> else {
+			print("[FATAL] stub return value not specified for getExampleItems(). Use given.")
+			fatalError("[FATAL] stub return value not specified for getExampleItems(). Use given.")
+		}
+		return value
       }
       
       func getItemDetails(item: Item) -> Observable<ItemDetails> {
           addInvocation(.getItemDetails__item_item(.value(item)))
           	let perform = methodPerformValue(.getItemDetails__item_item(.value(item))) as? (Item) -> Void
 			perform?(item)
-          return methodReturnValue(.getItemDetails__item_item(.value(item))) as! Observable<ItemDetails> 
+          guard let value = methodReturnValue(.getItemDetails__item_item(.value(item))) as? Observable<ItemDetails> else {
+			print("[FATAL] stub return value not specified for getItemDetails(item: Item). Use given.")
+			fatalError("[FATAL] stub return value not specified for getItemDetails(item: Item). Use given.")
+		}
+		return value
       }
       
       func update(item: Item, withLimit limit: Decimal, expirationDate date: Date?) -> Single<Void> {
           addInvocation(.update__item_itemwithLimit_limitexpirationDate_date(.value(item), .value(limit), .value(date)))
           	let perform = methodPerformValue(.update__item_itemwithLimit_limitexpirationDate_date(.value(item), .value(limit), .value(date))) as? (Item, Decimal, Date?) -> Void
 			perform?(item, limit, date)
-          return methodReturnValue(.update__item_itemwithLimit_limitexpirationDate_date(.value(item), .value(limit), .value(date))) as! Single<Void> 
+          guard let value = methodReturnValue(.update__item_itemwithLimit_limitexpirationDate_date(.value(item), .value(limit), .value(date))) as? Single<Void> else {
+			print("[FATAL] stub return value not specified for update(item: Item, withLimit limit: Decimal, expirationDate date: Date?). Use given.")
+			fatalError("[FATAL] stub return value not specified for update(item: Item, withLimit limit: Decimal, expirationDate date: Date?). Use given.")
+		}
+		return value
       }
       
       fileprivate enum MethodType {
@@ -493,32 +538,62 @@ class ItemsModelMock: ItemsModel, Mock {
             
 
       static var defaultIdentifier: Int { 
-		get { return ItemsModelMock.__defaultIdentifier }
+		get { 
+			guard let value = ItemsModelMock.__defaultIdentifier else { 				print("[FATAL] ItemsModelMock - value for __defaultIdentifier is not set!")
+				fatalError("[FATAL] ItemsModelMock - value for __defaultIdentifier is not set!")
+			}
+			return value 
+		}
 		set { ItemsModelMock.__defaultIdentifier = newValue }
 	}
 	private static var __defaultIdentifier: Int!      
       static var optionalIdentifier: String? { 
-		get { return ItemsModelMock.__optionalIdentifier }
+		get { 
+			guard let value = ItemsModelMock.__optionalIdentifier else { 				print("[FATAL] ItemsModelMock - value for __optionalIdentifier is not set!")
+				fatalError("[FATAL] ItemsModelMock - value for __optionalIdentifier is not set!")
+			}
+			return value 
+		}
 		set { ItemsModelMock.__optionalIdentifier = newValue }
 	}
 	private static var __optionalIdentifier: String?      
       var context: Any? { 
-		get { return __context }
+		get { 
+			guard let value = __context else { 				print("[FATAL] ItemsModelMock - value for __context is not set!")
+				fatalError("[FATAL] ItemsModelMock - value for __context is not set!")
+			}
+			return value 
+		}
 		set { __context = newValue }
 	}
 	private var __context: Any?      
       var storage: Any! { 
-		get { return __storage }
+		get { 
+			guard let value = __storage else { 				print("[FATAL] ItemsModelMock - value for __storage is not set!")
+				fatalError("[FATAL] ItemsModelMock - value for __storage is not set!")
+			}
+			return value 
+		}
 		set { __storage = newValue }
 	}
 	private var __storage: Any!      
       var some: Any { 
-		get { return __some }
+		get { 
+			guard let value = __some else { 				print("[FATAL] ItemsModelMock - value for __some is not set!")
+				fatalError("[FATAL] ItemsModelMock - value for __some is not set!")
+			}
+			return value 
+		}
 		set { __some = newValue }
 	}
 	private var __some: Any!      
       var storedProperty: Any { 
-		get { return __storedProperty }
+		get { 
+			guard let value = __storedProperty else { 				print("[FATAL] ItemsModelMock - value for __storedProperty is not set!")
+				fatalError("[FATAL] ItemsModelMock - value for __storedProperty is not set!")
+			}
+			return value 
+		}
 		set { __storedProperty = newValue }
 	}
 	private var __storedProperty: Any!                  
@@ -527,21 +602,33 @@ class ItemsModelMock: ItemsModel, Mock {
           addInvocation(.getExampleItems)
           	let perform = methodPerformValue(.getExampleItems) as? () -> Void
 			perform?()
-          return methodReturnValue(.getExampleItems) as! Observable<[Item]> 
+          guard let value = methodReturnValue(.getExampleItems) as? Observable<[Item]> else {
+			print("[FATAL] stub return value not specified for getExampleItems(). Use given.")
+			fatalError("[FATAL] stub return value not specified for getExampleItems(). Use given.")
+		}
+		return value
       }
       
       func getItemDetails(item: Item) -> Observable<ItemDetails> {
           addInvocation(.getItemDetails__item_item(.value(item)))
           	let perform = methodPerformValue(.getItemDetails__item_item(.value(item))) as? (Item) -> Void
 			perform?(item)
-          return methodReturnValue(.getItemDetails__item_item(.value(item))) as! Observable<ItemDetails> 
+          guard let value = methodReturnValue(.getItemDetails__item_item(.value(item))) as? Observable<ItemDetails> else {
+			print("[FATAL] stub return value not specified for getItemDetails(item: Item). Use given.")
+			fatalError("[FATAL] stub return value not specified for getItemDetails(item: Item). Use given.")
+		}
+		return value
       }
       
       func getPrice(for item: Item) -> Decimal {
           addInvocation(.getPrice__for_item(.value(item)))
           	let perform = methodPerformValue(.getPrice__for_item(.value(item))) as? (Item) -> Void
 			perform?(item)
-          return methodReturnValue(.getPrice__for_item(.value(item))) as! Decimal 
+          guard let value = methodReturnValue(.getPrice__for_item(.value(item))) as? Decimal else {
+			print("[FATAL] stub return value not specified for getPrice(for item: Item). Use given.")
+			fatalError("[FATAL] stub return value not specified for getPrice(for item: Item). Use given.")
+		}
+		return value
       }
       
       fileprivate enum MethodType {
@@ -814,35 +901,55 @@ class SampleServiceTypeMock: SampleServiceType, Mock {
           addInvocation(.serviceName)
           	let perform = methodPerformValue(.serviceName) as? () -> Void
 			perform?()
-          return methodReturnValue(.serviceName) as! String 
+          guard let value = methodReturnValue(.serviceName) as? String else {
+			print("[FATAL] stub return value not specified for serviceName(). Use given.")
+			fatalError("[FATAL] stub return value not specified for serviceName(). Use given.")
+		}
+		return value
       }
       
       func getPoint(from point: Point) -> Point {
           addInvocation(.getPoint__from_point(.value(point)))
           	let perform = methodPerformValue(.getPoint__from_point(.value(point))) as? (Point) -> Void
 			perform?(point)
-          return methodReturnValue(.getPoint__from_point(.value(point))) as! Point 
+          guard let value = methodReturnValue(.getPoint__from_point(.value(point))) as? Point else {
+			print("[FATAL] stub return value not specified for getPoint(from point: Point). Use given.")
+			fatalError("[FATAL] stub return value not specified for getPoint(from point: Point). Use given.")
+		}
+		return value
       }
       
       func getPoint(from tuple: (Float,Float)) -> Point {
           addInvocation(.getPoint__from_tuple(.value(tuple)))
           	let perform = methodPerformValue(.getPoint__from_tuple(.value(tuple))) as? ((Float,Float)) -> Void
 			perform?(tuple)
-          return methodReturnValue(.getPoint__from_tuple(.value(tuple))) as! Point 
+          guard let value = methodReturnValue(.getPoint__from_tuple(.value(tuple))) as? Point else {
+			print("[FATAL] stub return value not specified for getPoint(from tuple: (Float,Float)). Use given.")
+			fatalError("[FATAL] stub return value not specified for getPoint(from tuple: (Float,Float)). Use given.")
+		}
+		return value
       }
       
       func similarMethodThatDiffersOnType(_ value: Float) -> Bool {
           addInvocation(.similarMethodThatDiffersOnType__value_1(.value(value)))
           	let perform = methodPerformValue(.similarMethodThatDiffersOnType__value_1(.value(value))) as? (Float) -> Void
 			perform?(value)
-          return methodReturnValue(.similarMethodThatDiffersOnType__value_1(.value(value))) as! Bool 
+          guard let value = methodReturnValue(.similarMethodThatDiffersOnType__value_1(.value(value))) as? Bool else {
+			print("[FATAL] stub return value not specified for similarMethodThatDiffersOnType(_ value: Float). Use given.")
+			fatalError("[FATAL] stub return value not specified for similarMethodThatDiffersOnType(_ value: Float). Use given.")
+		}
+		return value
       }
       
       func similarMethodThatDiffersOnType(_ value: Point) -> Bool {
           addInvocation(.similarMethodThatDiffersOnType__value_2(.value(value)))
           	let perform = methodPerformValue(.similarMethodThatDiffersOnType__value_2(.value(value))) as? (Point) -> Void
 			perform?(value)
-          return methodReturnValue(.similarMethodThatDiffersOnType__value_2(.value(value))) as! Bool 
+          guard let value = methodReturnValue(.similarMethodThatDiffersOnType__value_2(.value(value))) as? Bool else {
+			print("[FATAL] stub return value not specified for similarMethodThatDiffersOnType(_ value: Point). Use given.")
+			fatalError("[FATAL] stub return value not specified for similarMethodThatDiffersOnType(_ value: Point). Use given.")
+		}
+		return value
       }
       
       func methodWithTypedef(_ scalar: Scalar) {
@@ -853,17 +960,25 @@ class SampleServiceTypeMock: SampleServiceType, Mock {
       }
       
       func methodWithClosures(success function: LinearFunction) -> ClosureFabric {
-          addInvocation(.methodWithClosures__success_function_1(.value(function)))
-          	let perform = methodPerformValue(.methodWithClosures__success_function_1(.value(function))) as? (LinearFunction) -> Void
+          addInvocation(.methodWithClosures__success_function_1(Parameter<LinearFunction>.any))
+          	let perform = methodPerformValue(.methodWithClosures__success_function_1(Parameter<LinearFunction>.any)) as? (LinearFunction) -> Void
 			perform?(function)
-          return methodReturnValue(.methodWithClosures__success_function_1(.value(function))) as! ClosureFabric 
+          guard let value = methodReturnValue(.methodWithClosures__success_function_1(.value(function))) as? ClosureFabric else {
+			print("[FATAL] stub return value not specified for methodWithClosures(success function: LinearFunction). Use given.")
+			fatalError("[FATAL] stub return value not specified for methodWithClosures(success function: LinearFunction). Use given.")
+		}
+		return value
       }
       
       func methodWithClosures(success function: ((Scalar,Scalar) -> Scalar)?) -> ((Int) -> Void) {
           addInvocation(.methodWithClosures__success_function_2(.value(function)))
           	let perform = methodPerformValue(.methodWithClosures__success_function_2(.value(function))) as? (((Scalar,Scalar) -> Scalar)?) -> Void
 			perform?(function)
-          return methodReturnValue(.methodWithClosures__success_function_2(.value(function))) as! ((Int) -> Void) 
+          guard let value = methodReturnValue(.methodWithClosures__success_function_2(.value(function))) as? ((Int) -> Void) else {
+			print("[FATAL] stub return value not specified for methodWithClosures(success function: ((Scalar,Scalar) -> Scalar)?). Use given.")
+			fatalError("[FATAL] stub return value not specified for methodWithClosures(success function: ((Scalar,Scalar) -> Scalar)?). Use given.")
+		}
+		return value
       }
       
       fileprivate enum MethodType {
@@ -1086,7 +1201,12 @@ class SimpleServiceTypeMock: SimpleServiceType, Mock {
             
 
       var youCouldOnlyGetThis: String { 
-		get { return __youCouldOnlyGetThis }
+		get { 
+			guard let value = __youCouldOnlyGetThis else { 				print("[FATAL] SimpleServiceTypeMock - value for __youCouldOnlyGetThis is not set!")
+				fatalError("[FATAL] SimpleServiceTypeMock - value for __youCouldOnlyGetThis is not set!")
+			}
+			return value 
+		}
 		set { __youCouldOnlyGetThis = newValue }
 	}
 	private var __youCouldOnlyGetThis: String!                  
@@ -1095,7 +1215,11 @@ class SimpleServiceTypeMock: SimpleServiceType, Mock {
           addInvocation(.serviceName)
           	let perform = methodPerformValue(.serviceName) as? () -> Void
 			perform?()
-          return methodReturnValue(.serviceName) as! String 
+          guard let value = methodReturnValue(.serviceName) as? String else {
+			print("[FATAL] stub return value not specified for serviceName(). Use given.")
+			fatalError("[FATAL] stub return value not specified for serviceName(). Use given.")
+		}
+		return value
       }
       
       fileprivate enum MethodType {
@@ -1193,6 +1317,189 @@ class SimpleServiceTypeMock: SimpleServiceType, Mock {
       }
 }
 
+// MARK: - UserNetworkType
+class UserNetworkTypeMock: UserNetworkType, Mock {
+
+      fileprivate var invocations: [MethodType] = []
+      var methodReturnValues: [MethodProxy] = []
+      var methodPerformValues: [PerformProxy] = []
+      var matcher: Matcher = Matcher.default
+            
+            
+
+      required init(config: NetworkConfig) {
+          
+          
+          
+      }
+      
+      required init(baseUrl: String) {
+          
+          
+          
+      }
+      
+      func getUser(for id: String, completion: (User?) -> Void) {
+          addInvocation(.getUser__for_idcompletion_completion(.value(id), Parameter<(User?) -> Void>.any))
+          	let perform = methodPerformValue(.getUser__for_idcompletion_completion(.value(id), Parameter<(User?) -> Void>.any)) as? (String, (User?) -> Void) -> Void
+			perform?(id, completion)
+          
+      }
+      
+      func getUserEscaping(for id: String, completion: @escaping (User?,Error?) -> Void) {
+          addInvocation(.getUserEscaping__for_idcompletion_completion(.value(id), .value(completion)))
+          	let perform = methodPerformValue(.getUserEscaping__for_idcompletion_completion(.value(id), .value(completion))) as? (String, @escaping (User?,Error?) -> Void) -> Void
+			perform?(id, completion)
+          
+      }
+      
+      func doSomething(prop: @autoclosure () -> String) {
+          addInvocation(.doSomething__prop_prop(Parameter< () -> String>.any))
+          	let perform = methodPerformValue(.doSomething__prop_prop(Parameter< () -> String>.any)) as? (@autoclosure () -> String) -> Void
+			perform?(prop)
+          
+      }
+      
+      func testDefaultValues(value: String) {
+          addInvocation(.testDefaultValues__value_value(.value(value)))
+          	let perform = methodPerformValue(.testDefaultValues__value_value(.value(value))) as? (String) -> Void
+			perform?(value)
+          
+      }
+      
+      fileprivate enum MethodType {
+
+          case getUser__for_idcompletion_completion(Parameter<String>, Parameter<(User?) -> Void>)      
+          case getUserEscaping__for_idcompletion_completion(Parameter<String>, Parameter< (User?,Error?) -> Void>)      
+          case doSomething__prop_prop(Parameter< () -> String>)      
+          case testDefaultValues__value_value(Parameter<String>)      
+
+
+          static func compareParameters(lhs: MethodType, rhs: MethodType, matcher: Matcher) -> Bool {
+              switch (lhs, rhs) {
+                  case (.getUser__for_idcompletion_completion(let lhsId, let lhsCompletion), .getUser__for_idcompletion_completion(let rhsId, let rhsCompletion)): 
+                      guard Parameter.compare(lhs: lhsId, rhs: rhsId, with: matcher) else { return false } 
+                      guard Parameter.compare(lhs: lhsCompletion, rhs: rhsCompletion, with: matcher) else { return false } 
+                      return true 
+                  case (.getUserEscaping__for_idcompletion_completion(let lhsId, let lhsCompletion), .getUserEscaping__for_idcompletion_completion(let rhsId, let rhsCompletion)): 
+                      guard Parameter.compare(lhs: lhsId, rhs: rhsId, with: matcher) else { return false } 
+                      guard Parameter.compare(lhs: lhsCompletion, rhs: rhsCompletion, with: matcher) else { return false } 
+                      return true 
+                  case (.doSomething__prop_prop(let lhsProp), .doSomething__prop_prop(let rhsProp)): 
+                      guard Parameter.compare(lhs: lhsProp, rhs: rhsProp, with: matcher) else { return false } 
+                      return true 
+                  case (.testDefaultValues__value_value(let lhsValue), .testDefaultValues__value_value(let rhsValue)): 
+                      guard Parameter.compare(lhs: lhsValue, rhs: rhsValue, with: matcher) else { return false } 
+                      return true 
+                  default: return false
+              }
+          }
+
+          func intValue() -> Int {
+              switch self {
+                  case let .getUser__for_idcompletion_completion(p0, p1): return p0.intValue + p1.intValue
+                  case let .getUserEscaping__for_idcompletion_completion(p0, p1): return p0.intValue + p1.intValue
+                  case let .doSomething__prop_prop(p0): return p0.intValue
+                  case let .testDefaultValues__value_value(p0): return p0.intValue
+              }
+          }
+      }
+
+      struct MethodProxy {
+          fileprivate var method: MethodType
+          var returns: Any?
+      }
+
+      struct VerificationProxy {
+          fileprivate var method: MethodType
+
+
+          static func getUser(for id: Parameter<String>, completion: Parameter<(User?) -> Void>) -> VerificationProxy {
+              return VerificationProxy(method: .getUser__for_idcompletion_completion(id, completion))
+          }
+  
+          static func getUserEscaping(for id: Parameter<String>, completion: Parameter< (User?,Error?) -> Void>) -> VerificationProxy {
+              return VerificationProxy(method: .getUserEscaping__for_idcompletion_completion(id, completion))
+          }
+  
+          static func doSomething(prop: Parameter< () -> String>) -> VerificationProxy {
+              return VerificationProxy(method: .doSomething__prop_prop(prop))
+          }
+  
+          static func testDefaultValues(value: Parameter<String>) -> VerificationProxy {
+              return VerificationProxy(method: .testDefaultValues__value_value(value))
+          }
+        }
+
+      struct PerformProxy {
+          fileprivate var method: MethodType
+          var performs: Any
+
+          static func getUser(for id: Parameter<String>, completion: Parameter<(User?) -> Void>, perform: (String, (User?) -> Void) -> Void) -> PerformProxy {
+              return PerformProxy(method: .getUser__for_idcompletion_completion(id, completion), performs: perform)
+          }
+  
+          static func getUserEscaping(for id: Parameter<String>, completion: Parameter< (User?,Error?) -> Void>, perform: (String, @escaping (User?,Error?) -> Void) -> Void) -> PerformProxy {
+              return PerformProxy(method: .getUserEscaping__for_idcompletion_completion(id, completion), performs: perform)
+          }
+  
+          static func doSomething(prop: Parameter< () -> String>, perform: (@autoclosure () -> String) -> Void) -> PerformProxy {
+              return PerformProxy(method: .doSomething__prop_prop(prop), performs: perform)
+          }
+  
+          static func testDefaultValues(value: Parameter<String>, perform: (String) -> Void) -> PerformProxy {
+              return PerformProxy(method: .testDefaultValues__value_value(value), performs: perform)
+          }
+        }
+
+      public func matchingCalls(_ method: VerificationProxy) -> Int {
+          return matchingCalls(method.method).count
+      }
+
+      public func given(_ method: MethodProxy) {
+          methodReturnValues.append(method)
+          methodReturnValues.sort { $0.method.intValue() < $1.method.intValue() }
+      }
+
+      public func perform(_ method: PerformProxy) {
+          methodPerformValues.append(method)
+          methodPerformValues.sort { $0.method.intValue() < $1.method.intValue() }
+      }
+
+      public func verify(_ method: VerificationProxy, count: UInt = 1, file: StaticString = #file, line: UInt = #line) {
+          let method = method.method
+          let invocations = matchingCalls(method)
+          XCTAssert(invocations.count == Int(count), "Expeced: \(count) invocations of `\(method)`, but was: \(invocations.count)", file: file, line: line)
+      }
+
+      private func addInvocation(_ call: MethodType) {
+          invocations.append(call)
+      }
+
+      private func methodReturnValue(_ method: MethodType) -> Any? {
+          let matched = methodReturnValues.reversed().first(where: { proxy -> Bool in
+              return MethodType.compareParameters(lhs: proxy.method, rhs: method, matcher: matcher)
+          })
+
+          return matched?.returns
+      }
+
+      private func methodPerformValue(_ method: MethodType) -> Any? {
+          let matched = methodPerformValues.reversed().first(where: { proxy -> Bool in
+              return MethodType.compareParameters(lhs: proxy.method, rhs: method, matcher: matcher)
+          })
+
+          return matched?.performs
+      }
+
+      private func matchingCalls(_ method: MethodType) -> [MethodType] {
+          let matchingInvocations = invocations.filter({ (call) -> Bool in
+              return MethodType.compareParameters(lhs: call, rhs: method, matcher: matcher)
+          })
+          return matchingInvocations
+      }
+}
+
 // MARK: - UserStorageType
 class UserStorageTypeMock: UserStorageType, Mock {
 
@@ -1207,7 +1514,11 @@ class UserStorageTypeMock: UserStorageType, Mock {
           addInvocation(.surname__for_name(.value(name)))
           	let perform = methodPerformValue(.surname__for_name(.value(name))) as? (String) -> Void
 			perform?(name)
-          return methodReturnValue(.surname__for_name(.value(name))) as! String 
+          guard let value = methodReturnValue(.surname__for_name(.value(name))) as? String else {
+			print("[FATAL] stub return value not specified for surname(for name: String). Use given.")
+			fatalError("[FATAL] stub return value not specified for surname(for name: String). Use given.")
+		}
+		return value
       }
       
       func storeUser(name: String, surname: String) {
